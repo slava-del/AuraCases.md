@@ -1,10 +1,7 @@
 // AuraCasesLanding.jsx
 
 import React, { useState, useEffect, useRef } from 'react';
-import {
-    motion,
-    AnimatePresence,
-} from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Star, Menu, X, ArrowUp, ChevronDown, ChevronUp, Sparkles } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import Slider from 'react-slick';
@@ -14,30 +11,77 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import moldovanFlag from './assets/moldova_flag.png';
 
-// Helper function to import all images from a directory
-const importAll = (r) => r.keys().map(r);
+import productImage1 from './assets/firstSectionImgs/7f545fb1678e74424871418e6d61b193.jpg';
 
-// Dynamically import all product images from the assets folder
-const productImages = importAll(
-    require.context('./assets/firstSectionImgs', false, /\.(png|jpe?g|svg)$/)
-);
 
-// Dynamically import all model images from the productImgsPng folder
-const modelImages = importAll(
-    require.context('./assets/productImgsPng', false, /\.(png|jpe?g|svg)$/)
-);
+import modelImage1 from './assets/productImgsPng/result_01d5520fbe9862a6b184c25dd40fb881-removebg-preview.png';
+import modelImage2 from './assets/productImgsPng/result_185cdbb5d6bbd94efcd9305decf1e30f-removebg-preview.png';
+import modelImage3 from './assets/productImgsPng/result_21d80f7613f7a11206a1504fea307d77-removebg-preview (1).png';
+import modelImage4 from './assets/productImgsPng/result_286bfecf60a65a9316abbc5d9a49fcec-removebg-preview.png';
+import modelImage5 from './assets/productImgsPng/result_28952747b701046c63a0e6832ecd601d-removebg-preview.png';
+import modelImage6 from './assets/productImgsPng/result_4e266c194a723b866c00bac3151c0c42-removebg-preview.png';
+import modelImage7 from './assets/productImgsPng/result_5ccf7bd085b46e9ab80621b071b3a025-removebg-preview.png';
+import modelImage8 from './assets/productImgsPng/result_6ffa6374e06ca18a6536efc4d7a9d738-removebg-preview.png';
+import modelImage9 from './assets/productImgsPng/result_88bef67ee445897568d3f29d3b4876cb-removebg-preview.png';
+import modelImage10 from './assets/productImgsPng/result_c1b910ef699aa428f25188fc5bc967e1-removebg-preview.png';
+import modelImage11 from './assets/productImgsPng/result_c3ffaecf5a56db6ce2116a6cb80b22bf-removebg-preview.png';
+import modelImage12 from './assets/productImgsPng/result_download__4_-removebg-preview.png';
+import modelImage13 from './assets/productImgsPng/result_Group9-removebg-preview.png';
+import modelImage14 from './assets/productImgsPng/result_Group_5-removebg-preview.png';
+import modelImage15 from './assets/productImgsPng/result_Group_6-removebg-preview.png';
+import modelImage16 from './assets/productImgsPng/result_Group_7-removebg-preview.png';
+import modelImage17 from './assets/productImgsPng/result_king_of_clubs-removebg-preview.png';
+import modelImage18 from './assets/productImgsPng/result_The_creation_of_Adam-_Wallpaper_Asthetic-removebg-preview.png';
 
-// Dynamically import all showcase images from the showcaseImgs folder
-const showcaseImages = importAll(
-    require.context('./assets/showcaseImgs', false, /\.(png|jpe?g|svg)$/)
-);
 
-// Dynamically import all review images from the reviewImgs folder
-const reviewImages = importAll(
-    require.context('./assets/reviewImgs', false, /\.(png|jpe?g|svg)$/)
-);
+import showcaseImage1 from './assets/showcaseImgs/Coque-de-t-l-phone-avec-cran-Eink-coque-arri-re-intelligente-coque-de-protection-pour_jpg_1ebbc342-c6b6-4f68-980a-8ca6a66e381d.png';
+import showcaseImage2 from './assets/showcaseImgs/H05c977caea2f4562abf5a244665eb00cM.png';
+import showcaseImage3 from './assets/showcaseImgs/Hc227ae41eef444b0a714ee1f4a02a885W.png';
+import showcaseImage4 from './assets/showcaseImgs/Hebb1e2cf7028411497526304a5bf1df2h.png';
 
-// Updated models array with all iPhones from 13 to 15 Pro Max
+
+import reviewImage1 from './assets/reviewImgs/A069bc20f4eeb45ecad928cd297610bbfl.jpg_800x800.jpeg_.jpg';
+import reviewImage2 from './assets/reviewImgs/A38e65e8d5cbb4deab6dc7062bf02a2acK.jpg_800x800.jpeg_.jpg';
+import reviewImage3 from './assets/reviewImgs/A56add6df47954882929f84b42bd29311E.jpg_800x800.jpeg_.jpg';
+import reviewImage4 from './assets/reviewImgs/A67f5335a0dea4ee4a6b32b7542249eaaV.jpeg_800x800.jpeg_.jpg';
+import reviewImage5 from './assets/reviewImgs/A7880db3ccc1044d4866090eee7bbcb08N.jpeg_800x800.jpeg_.jpg';
+import reviewImage6 from './assets/reviewImgs/Af6036f3b5e5c48039bcb7cf43a3969b7H.jpg_800x800.jpeg_.jpg';
+import reviewImage7 from './assets/reviewImgs/Afa38df3f881342198faeb5818b19a06ah.jpg_800x800.jpeg_.jpg';
+
+const productImages = [productImage1];
+
+const modelImages = [
+    modelImage1,
+    modelImage2,
+    modelImage3,
+    modelImage4,
+    modelImage5,
+    modelImage6,
+    modelImage7,
+    modelImage8,
+    modelImage9,
+    modelImage10,
+    modelImage11,
+    modelImage12,
+    modelImage13,
+    modelImage14,
+    modelImage15,
+    modelImage16,
+    modelImage17,
+    modelImage18,
+];
+const showcaseImages = [showcaseImage1, showcaseImage2, showcaseImage3, showcaseImage4];
+const reviewImages = [
+    reviewImage1,
+    reviewImage2,
+    reviewImage3,
+    reviewImage4,
+    reviewImage5,
+    reviewImage6,
+    reviewImage7,
+];
+
+
 const models = [
     { id: 'iphone13', name: 'iPhone 13' },
     { id: 'iphone13mini', name: 'iPhone 13 Mini' },
@@ -53,7 +97,6 @@ const models = [
     { id: 'iphone15promax', name: 'iPhone 15 Pro Max' },
 ];
 
-// Usage steps for the features and video section
 const usageSteps = [
     {
         number: '1',
@@ -100,7 +143,6 @@ const stylesList = [
     'warm',
 ];
 
-
 export default function AuraCasesLanding() {
     const { t, i18n } = useTranslation();
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -121,10 +163,10 @@ export default function AuraCasesLanding() {
 
     // Features and Specifications data
     const featuresList = [
-        "Premium polycarbonate shell with soft-touch finish",
-        "Precision-cut ports for easy access to all buttons and features",
-        "Wireless charging compatible",
-        "Raised bezel for screen and camera protection"
+        'Premium polycarbonate shell with soft-touch finish',
+        'Precision-cut ports for easy access to all buttons and features',
+        'Wireless charging compatible',
+        'Raised bezel for screen and camera protection',
     ];
 
     const specificationsList = [
@@ -135,7 +177,7 @@ export default function AuraCasesLanding() {
     ];
 
     // Fetch testimonials from translations
-    const testimonials = t('testimonials', { returnObjects: true });
+    const testimonials = t('testimonials', { returnObjects: true }) || [];
 
     // Carousel effect for Hero section
     useEffect(() => {
@@ -167,11 +209,7 @@ export default function AuraCasesLanding() {
             const scrollPercent = (scrollTop / docHeight) * 100;
             setScrollProgress(scrollPercent);
 
-            if (scrollTop > 300) {
-                setShowScrollToTop(true);
-            } else {
-                setShowScrollToTop(false);
-            }
+            setShowScrollToTop(scrollTop > 300);
         };
 
         window.addEventListener('scroll', handleScroll);
@@ -188,7 +226,7 @@ export default function AuraCasesLanding() {
         };
 
         const observerCallback = (entries) => {
-            entries.forEach(entry => {
+            entries.forEach((entry) => {
                 if (entry.isIntersecting) {
                     setCurrentSection(entry.target.id);
                 }
@@ -196,7 +234,7 @@ export default function AuraCasesLanding() {
         };
 
         const observer = new IntersectionObserver(observerCallback, observerOptions);
-        sections.forEach(id => {
+        sections.forEach((id) => {
             const section = document.getElementById(id);
             if (section) {
                 observer.observe(section);
@@ -205,7 +243,7 @@ export default function AuraCasesLanding() {
         });
 
         return () => {
-            sections.forEach(id => {
+            sections.forEach((id) => {
                 const section = sectionsRef.current[id];
                 if (section) {
                     observer.unobserve(section);
@@ -299,16 +337,16 @@ export default function AuraCasesLanding() {
 
     return (
         <div className="min-h-screen bg-white text-black relative">
-            {/* Desktop Scroll Progress Bar and Back to Top Button */}
+            {/* Scroll Progress and Back to Top */}
             <div className="hidden lg:flex fixed right-6 top-1/2 transform -translate-y-1/2 flex-col items-center space-y-6 z-50">
-                {/* Scroll Progress Bar Container */}
+                {/* Scroll Progress Bar */}
                 <div className="w-3 h-[5cm] bg-gray-300 rounded-full flex flex-col overflow-hidden">
                     <motion.div
                         className="w-full bg-black rounded-full"
                         style={{ height: `${scrollProgress}%` }}
                         initial={{ height: 0 }}
                         animate={{ height: `${scrollProgress}%` }}
-                        transition={{ ease: "linear", duration: 0.2 }}
+                        transition={{ ease: 'linear', duration: 0.2 }}
                     />
                 </div>
                 {/* Back to Top Button */}
@@ -326,14 +364,14 @@ export default function AuraCasesLanding() {
                 )}
             </div>
 
-            {/* Mobile Horizontal Scroll Progress Bar */}
+            {/* Mobile Scroll Progress Bar */}
             <div className="fixed top-0 left-0 w-full h-1 bg-gray-300 z-50 lg:hidden">
                 <motion.div
                     className="h-full bg-black"
                     style={{ width: `${scrollProgress}%` }}
                     initial={{ width: 0 }}
                     animate={{ width: `${scrollProgress}%` }}
-                    transition={{ ease: "linear", duration: 0.2 }}
+                    transition={{ ease: 'linear', duration: 0.2 }}
                 />
             </div>
 
@@ -525,9 +563,7 @@ export default function AuraCasesLanding() {
                                 </span>
                             </h3>
 
-                            <p className="text-xl font-bold mb-6 text-left">
-                                {t('Price')}: 699 MDL
-                            </p>
+                            <p className="text-xl font-bold mb-6 text-left">{t('Price')}: 699 MDL</p>
                             <div className="flex flex-col space-y-4">
                                 <motion.button
                                     className="bg-black text-white px-6 py-2 rounded-lg text-lg font-semibold hover:bg-gray-800 transition duration-300"
@@ -539,14 +575,8 @@ export default function AuraCasesLanding() {
                                     {t('Order Now')}
                                 </motion.button>
                                 <div className="flex items-center">
-                                    <img
-                                        src={moldovanFlag}
-                                        alt={t('Moldova Flag')}
-                                        className="w-9 h-6 rounded-lg"
-                                    />
-                                    <span className="ml-2 text-sm italic text-white">
-                                        {t('Made in Moldova')}
-                                    </span>
+                                    <img src={moldovanFlag} alt={t('Moldova Flag')} className="w-9 h-6 rounded-lg" />
+                                    <span className="ml-2 text-sm italic text-white">{t('Made in Moldova')}</span>
                                 </div>
                             </div>
                         </motion.div>
@@ -605,9 +635,7 @@ export default function AuraCasesLanding() {
                                 </span>
                             </h3>
 
-                            <p className="text-2xl font-bold mb-8">
-                                {t('Price')}: 699 MDL
-                            </p>
+                            <p className="text-2xl font-bold mb-8">{t('Price')}: 699 MDL</p>
                             <div className="flex items-center space-x-4">
                                 <motion.button
                                     className="bg-black text-white px-8 py-2 rounded-lg text-lg font-semibold hover:bg-gray-800 transition duration-300"
@@ -619,14 +647,8 @@ export default function AuraCasesLanding() {
                                     {t('Order Now')}
                                 </motion.button>
                                 <div className="flex items-center">
-                                    <img
-                                        src={moldovanFlag}
-                                        alt={t('Moldova Flag')}
-                                        className="w-9 h-6 rounded-lg"
-                                    />
-                                    <span className="ml-2 text-base italic text-black-500">
-                                        {t('Made in Moldova')}
-                                    </span>
+                                    <img src={moldovanFlag} alt={t('Moldova Flag')} className="w-9 h-6 rounded-lg" />
+                                    <span className="ml-2 text-base italic text-black-500">{t('Made in Moldova')}</span>
                                 </div>
                             </div>
                         </motion.div>
@@ -653,10 +675,8 @@ export default function AuraCasesLanding() {
                                 </AnimatePresence>
                             </div>
                         </motion.div>
-
                     </div>
                 </div>
-
             </section>
 
             {/* Product Presentation Section */}
@@ -668,7 +688,7 @@ export default function AuraCasesLanding() {
                     <div className="flex flex-col md:flex-row items-center justify-center mb-12 w-full">
                         {/* Customization Options */}
                         <div className="flex flex-col md:w-1/2 space-y-6">
-                            {/* Main Text - Order 1 on mobile */}
+                            {/* Description and Features */}
                             <motion.div
                                 className="order-1"
                                 initial={{ opacity: 0, x: -50 }}
@@ -683,7 +703,7 @@ export default function AuraCasesLanding() {
                                 </p>
                             </motion.div>
 
-                            {/* Product Image - Order 2 on mobile */}
+                            {/* Product Image for Mobile */}
                             <motion.div
                                 className="order-2 md:hidden flex justify-center"
                                 initial={{ opacity: 0, scale: 0.95 }}
@@ -706,7 +726,7 @@ export default function AuraCasesLanding() {
                                 </div>
                             </motion.div>
 
-                            {/* Description, Specs, and Features - Order 3 on mobile */}
+                            {/* Description, Specs, and Features */}
                             <motion.div
                                 className="order-3"
                                 initial={{ opacity: 0 }}
@@ -719,7 +739,7 @@ export default function AuraCasesLanding() {
                                         <label htmlFor="model" className="text-lg font-semibold">
                                             {t('Select your iPhone Model')}:
                                         </label>
-                                        {/* Modern Dropdown Menu */}
+                                        {/* Dropdown Menu */}
                                         <div className="relative inline-block text-left">
                                             <motion.button
                                                 type="button"
@@ -755,7 +775,6 @@ export default function AuraCasesLanding() {
                                                                         setSelectedModel(model.id);
                                                                         setDropdownOpen(false);
                                                                     }}
-                                                                    // Removed the backgroundColor in whileHover to prevent all items being highlighted
                                                                     whileTap={{ scale: 0.98 }}
                                                                     type="button"
                                                                 >
@@ -849,7 +868,7 @@ export default function AuraCasesLanding() {
                                 </div>
                             </motion.div>
 
-                            {/* Buy Button - Order 4 on mobile */}
+                            {/* Buy Button */}
                             <motion.div
                                 className="order-4"
                                 initial={{ opacity: 0 }}
@@ -868,7 +887,7 @@ export default function AuraCasesLanding() {
                             </motion.div>
                         </div>
 
-                        {/* Product Image Carousel - Visible on Desktop */}
+                        {/* Product Image Carousel for Desktop */}
                         <motion.div
                             className="hidden md:flex md:w-1/2 mb-6 md:mb-0 flex items-center justify-center"
                             initial={{ opacity: 0 }}
