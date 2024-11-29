@@ -40,17 +40,9 @@ const reviewImages = importAll(
 // Updated models array with all iPhones from 13 to 15 Pro Max
 const models = [
     { id: 'iphone13', name: 'iPhone 13' },
-    { id: 'iphone13mini', name: 'iPhone 13 Mini' },
-    { id: 'iphone13pro', name: 'iPhone 13 Pro' },
-    { id: 'iphone13promax', name: 'iPhone 13 Pro Max' },
     { id: 'iphone14', name: 'iPhone 14' },
-    { id: 'iphone14plus', name: 'iPhone 14 Plus' },
-    { id: 'iphone14pro', name: 'iPhone 14 Pro' },
-    { id: 'iphone14promax', name: 'iPhone 14 Pro Max' },
     { id: 'iphone15', name: 'iPhone 15' },
-    { id: 'iphone15plus', name: 'iPhone 15 Plus' },
-    { id: 'iphone15pro', name: 'iPhone 15 Pro' },
-    { id: 'iphone15promax', name: 'iPhone 15 Pro Max' },
+    { id: 'iphone16', name: 'iPhone 16' },
 ];
 
 // Usage steps for the features and video section
@@ -205,13 +197,16 @@ export default function AuraCasesLanding() {
         });
 
         return () => {
+            const currentSectionsRef = sectionsRef.current; 
+        
             sections.forEach(id => {
-                const section = sectionsRef.current[id];
+                const section = currentSectionsRef[id]; 
                 if (section) {
                     observer.unobserve(section);
                 }
             });
         };
+        
     }, []);
 
     // Text animation for main text
@@ -1090,46 +1085,55 @@ export default function AuraCasesLanding() {
             </section>
 
             {/* Testimonials */}
-            <section id="testimonials" className="py-20 bg-white">
-                <div className="container max-w-7xl mx-auto px-4">
-                    <h2 className="text-3xl font-bold mb-12 text-center text-black">
-                        {t('Testimonials')}
-                    </h2>
-                    <Slider
-                        {...sliderSettings}
-                    >
-                        {testimonials.map((testimonial, index) => (
-                            <div key={index} className="px-4">
-                                <div
-                                    className="bg-white rounded-lg shadow-md p-6 flex h-full items-center justify-between mb-8"
-                                    style={{ height: '200px', overflow: 'hidden' }}
-                                >
-                                    {/* Content */}
-                                    <div className="flex-1 pr-4">
-                                        <p className="text-gray-700 mb-4 line-clamp-5">"{testimonial.content}"</p>
-                                        <div className="flex items-center justify-between">
-                                            <span className="font-semibold text-black">{testimonial.name}</span>
-                                            <div className="flex">
-                                                {[...Array(testimonial.rating)].map((_, i) => (
-                                                    <Star key={i} className="w-5 h-5 fill-black stroke-black" />
-                                                ))}
-                                            </div>
-                                        </div>
+<section id="testimonials" className="py-20 bg-white">
+    <div className="container max-w-7xl mx-auto px-4">
+        <h2 className="text-3xl font-bold mb-12 text-center text-black">
+            {t('Testimonials')}
+        </h2>
+        <Slider {...(sliderSettings || {})}>
+            {testimonials && testimonials.length > 0 ? (
+                testimonials.map((testimonial, index) => (
+                    <div key={index} className="px-4">
+                        <div
+                            className="bg-white rounded-lg shadow-md p-6 flex h-full items-center justify-between mb-8"
+                            style={{ height: '200px', overflow: 'hidden' }}
+                        >
+                            {/* Content */}
+                            <div className="flex-1 pr-4">
+                                <p className="text-gray-700 mb-4 line-clamp-5">
+                                    "{testimonial.content || t('No testimonial provided')}"
+                                </p>
+                                <div className="flex items-center justify-between">
+                                    <span className="font-semibold text-black">
+                                        {testimonial.name || t('Anonymous Reviewer')}
+                                    </span>
+                                    <div className="flex">
+                                        {[...Array(testimonial.rating || 0)].map((_, i) => (
+                                            <Star key={i} className="w-5 h-5 fill-black stroke-black" />
+                                        ))}
                                     </div>
-                                    {/* Image */}
-                                    {getReviewImage(index) && (
-                                        <img
-                                            src={getReviewImage(index)}
-                                            alt={`${t('Review')} ${index + 1} Image`}
-                                            className="w-24 h-24 object-cover rounded-lg"
-                                        />
-                                    )}
                                 </div>
                             </div>
-                        ))}
-                    </Slider>
-                </div>
-            </section>
+                            {/* Image */}
+                            {getReviewImage(index) && (
+                                <img
+                                    src={getReviewImage(index)}
+                                    alt={testimonial.name || t('Reviewer')}
+                                    className="w-24 h-24 object-cover rounded-lg"
+                                />
+                            )}
+                        </div>
+                    </div>
+                ))
+            ) : (
+                <p className="text-center text-gray-500">
+                    {t('No testimonials available')}
+                </p>
+            )}
+        </Slider>
+    </div>
+</section>
+
 
             {/* Newsletter Subscription Section */}
             <section id="contact" className="bg-white py-20">
