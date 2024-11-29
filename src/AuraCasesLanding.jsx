@@ -220,37 +220,38 @@ export default function AuraCasesLanding() {
     useEffect(() => {
         const sections = ['products', 'features-video', 'testimonials', 'contact'];
         const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.6,
+          root: null,
+          rootMargin: '0px',
+          threshold: 0.6,
         };
-
+      
         const observerCallback = (entries) => {
-            entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                    setCurrentSection(entry.target.id);
-                }
-            });
-        };
-
-        const observer = new IntersectionObserver(observerCallback, observerOptions);
-        sections.forEach((id) => {
-            const section = document.getElementById(id);
-            if (section) {
-                observer.observe(section);
-                sectionsRef.current[id] = section;
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              setCurrentSection(entry.target.id);
             }
-        });
-
-        return () => {
-            sections.forEach((id) => {
-                const section = sectionsRef.current[id];
-                if (section) {
-                    observer.unobserve(section);
-                }
-            });
+          });
         };
-    }, []);
+      
+        const observer = new IntersectionObserver(observerCallback, observerOptions);
+        const currentSections = {}; // Local copy
+      
+        sections.forEach((id) => {
+          const section = document.getElementById(id);
+          if (section) {
+            observer.observe(section);
+            currentSections[id] = section;
+          }
+        });
+      
+        sectionsRef.current = currentSections; // Update the ref
+      
+        return () => {
+          Object.values(currentSections).forEach((section) => {
+            observer.unobserve(section);
+          });
+        };
+      }, []);
 
     // Text animation for main text
     useEffect(() => {
@@ -1139,7 +1140,7 @@ export default function AuraCasesLanding() {
                                     {getReviewImage(index) && (
                                         <img
                                             src={getReviewImage(index)}
-                                            alt={`${t('Review')} ${index + 1} Image`}
+                                            alt={`${t('Review')} ${index + 1}`}
                                             className="w-24 h-24 object-cover rounded-lg"
                                         />
                                     )}
