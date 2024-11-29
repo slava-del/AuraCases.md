@@ -1,6 +1,6 @@
 // AuraCasesLanding.jsx
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     motion,
     AnimatePresence,
@@ -109,7 +109,6 @@ export default function AuraCasesLanding() {
     const [showcaseModalOpen, setShowcaseModalOpen] = useState(false);
     const [selectedShowcaseImage, setSelectedShowcaseImage] = useState(null);
 
-    const sectionsRef = useRef({});
 
     // Features and Specifications data
     const featuresList = [
