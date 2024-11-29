@@ -170,7 +170,7 @@ export default function AuraCasesLanding() {
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    // Intersection Observer for highlighting navbar links
+
     useEffect(() => {
         const sections = ['products', 'features-video', 'testimonials', 'contact'];
         const observerOptions = {
@@ -178,7 +178,7 @@ export default function AuraCasesLanding() {
             rootMargin: '0px',
             threshold: 0.6,
         };
-
+    
         const observerCallback = (entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -186,28 +186,26 @@ export default function AuraCasesLanding() {
                 }
             });
         };
-
+    
         const observer = new IntersectionObserver(observerCallback, observerOptions);
+    
+        const currentSections = {};
+    
         sections.forEach(id => {
             const section = document.getElementById(id);
             if (section) {
                 observer.observe(section);
-                sectionsRef.current[id] = section;
+                currentSections[id] = section;
             }
         });
 
         return () => {
-            const currentSectionsRef = sectionsRef.current; 
-        
-            sections.forEach(id => {
-                const section = currentSectionsRef[id]; 
-                if (section) {
-                    observer.unobserve(section);
-                }
+            Object.values(currentSections).forEach(section => {
+                observer.unobserve(section);
             });
         };
-        
     }, []);
+    
 
     // Text animation for main text
     useEffect(() => {
