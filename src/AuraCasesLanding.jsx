@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Star, Menu, X, ArrowUp, ChevronDown, ChevronUp, Sparkles } from 'lucide-react';
+import { Star, Menu, X, ArrowUp, ChevronDown, ChevronUp } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import Slider from 'react-slick';
 
