@@ -711,13 +711,13 @@ export default function AuraCasesLanding() {
                                 animate={{ opacity: 1, scale: 1 }}
                                 transition={{ duration: 0.5 }}
                             >
-                                <div className="relative w-full max-w-xs rounded-lg overflow-hidden h-60 sm:h-72 md:h-80">
+                                <div className="relative w-full max-w-sm rounded-lg overflow-hidden h-80 sm:h-96 md:h-104">
                                     <AnimatePresence mode="wait">
                                         <motion.img
                                             key={modelImageIndex}
                                             src={modelImages[modelImageIndex]}
                                             alt="AuraCases E-ink Case for iPhone"
-                                            className="absolute inset-0 w-full h-full object-contain"
+                                            className="absolute inset-0 w-full h-full object-contain" // or object-cover
                                             initial={{ opacity: 0 }}
                                             animate={{ opacity: 1 }}
                                             exit={{ opacity: 0 }}
@@ -726,7 +726,6 @@ export default function AuraCasesLanding() {
                                     </AnimatePresence>
                                 </div>
                             </motion.div>
-
 
                             {/* Description, Specs, and Features */}
                             <motion.div
@@ -889,31 +888,40 @@ export default function AuraCasesLanding() {
                             </motion.div>
                         </div>
 
+
                         {/* Product Image Carousel for Desktop */}
-                        <motion.div
-                            className="hidden md:flex md:w-1/2 mb-6 md:mb-0 flex items-center justify-center"
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ duration: 0.8, delay: 0.2 }}
-                        >
-                            <div className="relative w-full max-w-lg rounded-lg overflow-hidden">
-                                <AnimatePresence mode="wait">
-                                    <motion.img
-                                        key={modelImageIndex}
-                                        src={modelImages[modelImageIndex]}
-                                        alt="AuraCases E-ink Case for iPhone"
-                                        className="w-full h-auto object-contain"
-                                        initial={{ opacity: 0 }}
-                                        animate={{ opacity: 1 }}
-                                        exit={{ opacity: 0 }}
-                                        transition={{ duration: 0.25 }}
-                                    />
-                                </AnimatePresence>
-                            </div>
-                        </motion.div>
+<motion.div
+    className="hidden md:flex md:w-3/4 mb-6 md:mb-0 flex items-center justify-center"
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    transition={{ duration: 0.8, delay: 0.2 }}
+>
+    <div className="relative w-full max-w-4xl rounded-lg overflow-hidden h-[28rem]">
+        <AnimatePresence mode="wait">
+            <motion.img
+                key={modelImageIndex}
+                src={modelImages[modelImageIndex]}
+                alt="AuraCases E-ink Case for iPhone"
+                className="absolute h-full object-contain"
+                style={{
+                    right: 0, // Align to the right
+                    left: 'auto', // Remove left alignment
+                    margin: 0, // Remove any margin
+                }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.25 }}
+                loading="lazy" // Optional: Improves performance
+            />
+        </AnimatePresence>
+    </div>
+</motion.div>
+
                     </div>
                 </div>
             </section>
+
 
             {/* Combined Features and Video Section */}
             <section id="features-video" className="py-20 bg-white">
