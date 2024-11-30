@@ -159,6 +159,23 @@ export default function AuraCasesLanding() {
     const [showcaseModalOpen, setShowcaseModalOpen] = useState(false);
     const [selectedShowcaseImage, setSelectedShowcaseImage] = useState(null);
 
+    useEffect(() => {
+        // Set the page title
+        document.title = 'AuraCases.md';
+      
+        // Change the favicon
+        const favicon = document.querySelector("link[rel~='icon']");
+        if (favicon) {
+          favicon.href = '/logo_a.png'; 
+        } else {
+          const link = document.createElement('link');
+          link.rel = 'icon';
+          link.href = '/logo_a.png'; 
+          document.head.appendChild(link);
+        }
+      }, []);
+      
+
     const sectionsRef = useRef({});
 
     // Features and Specifications data
@@ -380,10 +397,10 @@ export default function AuraCasesLanding() {
             <header className="bg-white shadow-md fixed w-full z-50">
                 <div className="container max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
                     <div className="flex items-center space-x-2">
-                        <Sparkles className="h-6 w-6 text-black" />
+                        {/* <Sparkles className="h-6 w-6 text-black" /> */}
                         <h1 className="text-2xl font-bold text-black">
                             <span>Aura</span>
-                            <span>Cases</span>
+                            <span>Cases.md</span>
                         </h1>
                     </div>
                     <nav className="hidden md:flex space-x-6 items-center">
@@ -880,43 +897,44 @@ export default function AuraCasesLanding() {
                                     className="bg-black text-white px-6 py-2 rounded-lg text-lg font-semibold hover:bg-gray-800 transition duration-300"
                                     whileHover={{ scale: 1.05 }}
                                     whileTap={{ scale: 0.95 }}
-                                    onClick={() => alert(t('Purchase initiated!'))}
+                                    onClick={() => window.open('https://0569iylhqt8.typeform.com/to/TCcyaPV2', '_blank')}
                                     type="button"
                                 >
                                     {t('Order Now')}
                                 </motion.button>
                             </motion.div>
+
                         </div>
 
 
                         {/* Product Image Carousel for Desktop */}
-<motion.div
-    className="hidden md:flex md:w-3/4 mb-6 md:mb-0 flex items-center justify-center"
-    initial={{ opacity: 0 }}
-    animate={{ opacity: 1 }}
-    transition={{ duration: 0.8, delay: 0.2 }}
->
-    <div className="relative w-full max-w-4xl rounded-lg overflow-hidden h-[28rem]">
-        <AnimatePresence mode="wait">
-            <motion.img
-                key={modelImageIndex}
-                src={modelImages[modelImageIndex]}
-                alt="AuraCases E-ink Case for iPhone"
-                className="absolute h-full object-contain"
-                style={{
-                    right: 0, // Align to the right
-                    left: 'auto', // Remove left alignment
-                    margin: 0, // Remove any margin
-                }}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.25 }}
-                loading="lazy" // Optional: Improves performance
-            />
-        </AnimatePresence>
-    </div>
-</motion.div>
+                        <motion.div
+                            className="hidden md:flex md:w-3/4 mb-6 md:mb-0 flex items-center justify-center"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ duration: 0.8, delay: 0.2 }}
+                        >
+                            <div className="relative w-full max-w-4xl rounded-lg overflow-hidden h-[28rem]">
+                                <AnimatePresence mode="wait">
+                                    <motion.img
+                                        key={modelImageIndex}
+                                        src={modelImages[modelImageIndex]}
+                                        alt="AuraCases E-ink Case for iPhone"
+                                        className="absolute h-full object-contain"
+                                        style={{
+                                            right: 0, // Align to the right
+                                            left: 'auto', // Remove left alignment
+                                            margin: 0, // Remove any margin
+                                        }}
+                                        initial={{ opacity: 0 }}
+                                        animate={{ opacity: 1 }}
+                                        exit={{ opacity: 0 }}
+                                        transition={{ duration: 0.25 }}
+                                        loading="lazy" // Optional: Improves performance
+                                    />
+                                </AnimatePresence>
+                            </div>
+                        </motion.div>
 
                     </div>
                 </div>
