@@ -397,7 +397,6 @@ export default function AuraCasesLanding() {
             <header className="bg-white shadow-md fixed w-full z-50">
                 <div className="container max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
                     <div className="flex items-center space-x-2">
-                        {/* <Sparkles className="h-6 w-6 text-black" /> */}
                         <h1 className="text-2xl font-bold text-black">
                             <span>Aura</span>
                             <span>Cases.md</span>
