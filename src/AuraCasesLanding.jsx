@@ -220,38 +220,38 @@ export default function AuraCasesLanding() {
     useEffect(() => {
         const sections = ['products', 'features-video', 'testimonials', 'contact'];
         const observerOptions = {
-          root: null,
-          rootMargin: '0px',
-          threshold: 0.6,
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.6,
         };
-      
+
         const observerCallback = (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              setCurrentSection(entry.target.id);
-            }
-          });
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    setCurrentSection(entry.target.id);
+                }
+            });
         };
-      
+
         const observer = new IntersectionObserver(observerCallback, observerOptions);
         const currentSections = {}; // Local copy
-      
+
         sections.forEach((id) => {
-          const section = document.getElementById(id);
-          if (section) {
-            observer.observe(section);
-            currentSections[id] = section;
-          }
+            const section = document.getElementById(id);
+            if (section) {
+                observer.observe(section);
+                currentSections[id] = section;
+            }
         });
-      
+
         sectionsRef.current = currentSections; // Update the ref
-      
+
         return () => {
-          Object.values(currentSections).forEach((section) => {
-            observer.unobserve(section);
-          });
+            Object.values(currentSections).forEach((section) => {
+                observer.unobserve(section);
+            });
         };
-      }, []);
+    }, []);
 
     // Text animation for main text
     useEffect(() => {
@@ -711,13 +711,13 @@ export default function AuraCasesLanding() {
                                 animate={{ opacity: 1, scale: 1 }}
                                 transition={{ duration: 0.5 }}
                             >
-                                <div className="relative w-full max-w-xs rounded-lg overflow-hidden">
+                                <div className="relative w-full max-w-xs rounded-lg overflow-hidden h-60 sm:h-72 md:h-80">
                                     <AnimatePresence mode="wait">
                                         <motion.img
                                             key={modelImageIndex}
                                             src={modelImages[modelImageIndex]}
                                             alt="AuraCases E-ink Case for iPhone"
-                                            className="w-full h-auto object-contain"
+                                            className="absolute inset-0 w-full h-full object-contain"
                                             initial={{ opacity: 0 }}
                                             animate={{ opacity: 1 }}
                                             exit={{ opacity: 0 }}
@@ -726,6 +726,7 @@ export default function AuraCasesLanding() {
                                     </AnimatePresence>
                                 </div>
                             </motion.div>
+
 
                             {/* Description, Specs, and Features */}
                             <motion.div
