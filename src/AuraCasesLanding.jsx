@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Star, Menu, X, ArrowUp, ChevronDown, ChevronUp } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import Slider from 'react-slick';
+import { v4 as uuidv4 } from 'uuid';
 
 import './i18n';
 import 'slick-carousel/slick/slick.css';
@@ -159,22 +160,24 @@ export default function AuraCasesLanding() {
     const [showcaseModalOpen, setShowcaseModalOpen] = useState(false);
     const [selectedShowcaseImage, setSelectedShowcaseImage] = useState(null);
 
+    // New state variables for Price Tag
+    const [particles, setParticles] = useState([]);
+
     useEffect(() => {
         // Set the page title
         document.title = 'AuraCases.md';
-      
+
         // Change the favicon
         const favicon = document.querySelector("link[rel~='icon']");
         if (favicon) {
-          favicon.href = '/logo_a.png'; 
+            favicon.href = '/logo_a.png';
         } else {
-          const link = document.createElement('link');
-          link.rel = 'icon';
-          link.href = '/logo_a.png'; 
-          document.head.appendChild(link);
+            const link = document.createElement('link');
+            link.rel = 'icon';
+            link.href = '/logo_a.png';
+            document.head.appendChild(link);
         }
-      }, []);
-      
+    }, []);
 
     const sectionsRef = useRef({});
 
@@ -352,6 +355,25 @@ export default function AuraCasesLanding() {
         if (reviewImages.length === 0) return null;
         return reviewImages[index % reviewImages.length];
     };
+
+    // New Constants for Price and Badge
+    const price = '699 MDL'; // Set your desired price
+
+    // Initialize micro particles on component mount
+    useEffect(() => {
+        const generateParticles = () => {
+            const newParticles = Array.from({ length: 15 }, () => ({
+                id: uuidv4(),
+                x: Math.random() * 100, // Percentage for positioning
+                y: Math.random() * 100,
+                opacity: Math.random(),
+                scale: Math.random() * 0.5 + 0.5,
+            }));
+            setParticles(newParticles);
+        };
+
+        generateParticles();
+    }, []);
 
     return (
         <div className="min-h-screen bg-white text-black relative">
@@ -580,7 +602,8 @@ export default function AuraCasesLanding() {
                                 </span>
                             </h3>
 
-                            <p className="text-xl font-bold mb-6 text-left">{t('Price')}: 699 MDL</p>
+                            {/* Removed Price Tag */}
+
                             <div className="flex flex-col space-y-4">
                                 <motion.button
                                     className="bg-black text-white px-6 py-2 rounded-lg text-lg font-semibold hover:bg-gray-800 transition duration-300"
@@ -652,7 +675,8 @@ export default function AuraCasesLanding() {
                                 </span>
                             </h3>
 
-                            <p className="text-2xl font-bold mb-8">{t('Price')}: 699 MDL</p>
+                            {/* Removed Price Tag */}
+
                             <div className="flex items-center space-x-4">
                                 <motion.button
                                     className="bg-black text-white px-8 py-2 rounded-lg text-lg font-semibold hover:bg-gray-800 transition duration-300"
@@ -695,6 +719,7 @@ export default function AuraCasesLanding() {
                     </div>
                 </div>
             </section>
+
 
             {/* Product Presentation Section */}
             <section id="products" className="py-20 bg-white">
@@ -885,13 +910,14 @@ export default function AuraCasesLanding() {
                                 </div>
                             </motion.div>
 
-                            {/* Buy Button */}
+                            {/* Order Now and Price Row */}
                             <motion.div
-                                className="order-4"
+                                className="order-4 flex justify-between items-center w-full"
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
                                 transition={{ duration: 0.8, delay: 0.4 }}
                             >
+                                {/* Order Now Button */}
                                 <motion.button
                                     className="bg-black text-white px-6 py-2 rounded-lg text-lg font-semibold hover:bg-gray-800 transition duration-300"
                                     whileHover={{ scale: 1.05 }}
@@ -901,8 +927,60 @@ export default function AuraCasesLanding() {
                                 >
                                     {t('Order Now')}
                                 </motion.button>
-                            </motion.div>
 
+                                {/* Price Display */}
+                                <motion.div
+                                    className="relative flex items-center"
+                                    initial="visible"
+                                    whileHover="hover"
+                                    variants={{
+                                        visible: {},
+                                        hover: {},
+                                    }}
+                                >
+                                    {/* Price Text */}
+                                    <motion.span
+                                        className="text-2xl font-bold text-black"
+                                        variants={{
+                                            visible: { color: '#000' },
+                                            hover: { color: '#808080' },
+                                        }}
+                                        transition={{ duration: 0.3 }}
+                                    >
+                                        {price}
+                                    </motion.span>
+
+                                    {/* Micro Particles */}
+                                    <AnimatePresence>
+                                        {particles.map((particle) => (
+                                            <motion.div
+                                                key={particle.id}
+                                                className="absolute bg-green-500 rounded-full"
+                                                style={{
+                                                    width: '4px',
+                                                    height: '4px',
+                                                    top: `${particle.y}%`,
+                                                    left: `${particle.x}%`,
+                                                }}
+                                                initial={{ opacity: 0, scale: 0 }}
+                                                animate={{
+                                                    opacity: particle.opacity,
+                                                    scale: particle.scale,
+                                                    x: [0, 10, -10, 0], // Horizontal movement
+                                                    y: [0, -5, 5, 0],    // Vertical movement
+                                                }}
+                                                transition={{
+                                                    duration: 4,
+                                                    repeat: Infinity,
+                                                    ease: 'easeInOut',
+                                                    delay: Math.random() * 2, // Stagger the start time
+                                                }}
+                                                exit={{ opacity: 0, scale: 0 }}
+                                            />
+                                        ))}
+                                    </AnimatePresence>
+                                </motion.div>
+                            </motion.div>
                         </div>
 
 
