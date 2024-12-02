@@ -142,6 +142,17 @@ const stylesList = [
     'trendy',
     'artsy',
     'warm',
+    'sleek',
+    'minimal',
+    'funky',
+    'edgy',
+    'playful',
+    'quirky',
+    'boho',
+    'retro',
+    'grunge',
+    'luxury',
+    'neutral',
 ];
 
 export default function AuraCasesLanding() {
@@ -159,15 +170,10 @@ export default function AuraCasesLanding() {
     const [currentStyleText, setCurrentStyleText] = useState(0);
     const [showcaseModalOpen, setShowcaseModalOpen] = useState(false);
     const [selectedShowcaseImage, setSelectedShowcaseImage] = useState(null);
-
-    // New state variables for Price Tag
     const [particles, setParticles] = useState([]);
 
     useEffect(() => {
-        // Set the page title
         document.title = 'AuraCases.md';
-
-        // Change the favicon
         const favicon = document.querySelector("link[rel~='icon']");
         if (favicon) {
             favicon.href = '/logo_a.png';
@@ -183,18 +189,24 @@ export default function AuraCasesLanding() {
 
     // Features and Specifications data
     const featuresList = [
-        'Premium polycarbonate shell with soft-touch finish',
-        'Precision-cut ports for easy access to all buttons and features',
-        'Wireless charging compatible',
-        'Raised bezel for screen and camera protection',
+        'feature_eink_display',
+        'feature_durable_material',
+        'feature_wireless_charging',
+        'feature_precise_cutouts',
+        'feature_ease_of_use'
     ];
 
     const specificationsList = [
-        { label: 'Dimensions', value: '150 x 75 x 10 mm' },
-        { label: 'Weight', value: '50g' },
-        { label: 'Materials', value: 'Polycarbonate, TPU' },
-        { label: 'Compatibility', value: 'All major phone models' },
+        { label: 'spec_dimension_height', value: 'spec_dimension_height' },
+        { label: 'spec_dimension_width', value: 'spec_dimension_width' },
+        { label: 'spec_dimension_depth', value: 'spec_dimension_depth' },
+        { label: 'spec_material', value: 'spec_material' },
+        { label: 'spec_eink_display', value: 'spec_eink_display' },
+        { label: 'spec_compatibility', value: 'spec_compatibility' },
+        { label: 'spec_wireless_charging', value: 'spec_wireless_charging' },
+        { label: 'spec_accessories', value: 'spec_accessories' }
     ];
+
 
     // Fetch testimonials from translations
     const testimonials = t('testimonials', { returnObjects: true }) || [];
@@ -205,7 +217,7 @@ export default function AuraCasesLanding() {
             setCurrentImageIndex((prevIndex) =>
                 prevIndex === productImages.length - 1 ? 0 : prevIndex + 1
             );
-        }, 5000); // Change image every 5 seconds
+        }, 5000);
 
         return () => clearInterval(interval);
     }, []);
@@ -216,7 +228,7 @@ export default function AuraCasesLanding() {
             setModelImageIndex((prevIndex) =>
                 prevIndex === modelImages.length - 1 ? 0 : prevIndex + 1
             );
-        }, 5000); // Change image every 5 seconds
+        }, 5000);
 
         return () => clearInterval(interval);
     }, []);
@@ -254,7 +266,7 @@ export default function AuraCasesLanding() {
         };
 
         const observer = new IntersectionObserver(observerCallback, observerOptions);
-        const currentSections = {}; // Local copy
+        const currentSections = {};
 
         sections.forEach((id) => {
             const section = document.getElementById(id);
@@ -264,7 +276,7 @@ export default function AuraCasesLanding() {
             }
         });
 
-        sectionsRef.current = currentSections; // Update the ref
+        sectionsRef.current = currentSections;
 
         return () => {
             Object.values(currentSections).forEach((section) => {
@@ -277,7 +289,7 @@ export default function AuraCasesLanding() {
     useEffect(() => {
         const interval = setInterval(() => {
             setCurrentModelText((prev) => (prev + 1) % models.length);
-        }, 3000); // Change text every 3 seconds
+        }, 3000);
 
         return () => clearInterval(interval);
     }, []);
@@ -286,7 +298,7 @@ export default function AuraCasesLanding() {
     useEffect(() => {
         const interval = setInterval(() => {
             setCurrentStyleText((prev) => (prev + 1) % stylesList.length);
-        }, 2000); // Change text every 2 seconds
+        }, 2000);
 
         return () => clearInterval(interval);
     }, []);
@@ -297,7 +309,7 @@ export default function AuraCasesLanding() {
         if (section) {
             section.scrollIntoView({ behavior: 'smooth' });
         }
-        setMobileMenuOpen(false); // Close mobile menu if open
+        setMobileMenuOpen(false);
     };
 
     // Settings for react-slick slider
@@ -309,16 +321,16 @@ export default function AuraCasesLanding() {
         slidesToScroll: 1,
         autoplay: true,
         autoplaySpeed: 7000,
-        arrows: false, // Hide arrows for a cleaner look
+        arrows: false,
         responsive: [
             {
-                breakpoint: 1024, // For screens smaller than 1024px
+                breakpoint: 1024,
                 settings: {
                     slidesToShow: 2,
                 },
             },
             {
-                breakpoint: 640, // For screens smaller than 640px
+                breakpoint: 640,
                 settings: {
                     slidesToShow: 1,
                 },
@@ -357,14 +369,14 @@ export default function AuraCasesLanding() {
     };
 
     // New Constants for Price and Badge
-    const price = '699 MDL'; // Set your desired price
+    const price = '699 MDL';
 
     // Initialize micro particles on component mount
     useEffect(() => {
         const generateParticles = () => {
             const newParticles = Array.from({ length: 15 }, () => ({
                 id: uuidv4(),
-                x: Math.random() * 100, // Percentage for positioning
+                x: Math.random() * 100,
                 y: Math.random() * 100,
                 opacity: Math.random(),
                 scale: Math.random() * 0.5 + 0.5,
@@ -564,9 +576,8 @@ export default function AuraCasesLanding() {
                         >
                             {/* Main Heading */}
                             <h2 className="text-3xl font-extrabold mb-4 text-left">
-                                Personalizează
+                                {t('Personalizează experiența')}
                                 <br />
-                                experiența{' '}
                                 <span className="relative inline-block">
                                     <AnimatePresence mode="wait">
                                         <motion.span
@@ -635,9 +646,8 @@ export default function AuraCasesLanding() {
                         >
                             {/* Main Heading */}
                             <h2 className="text-4xl md:text-5xl font-extrabold mb-6 leading-tight">
-                                Personalizează
+                                {t('Personalizează experiența')}
                                 <br />
-                                experiența{' '}
                                 <span className="relative inline-block">
                                     <AnimatePresence mode="wait">
                                         <motion.span
@@ -792,7 +802,7 @@ export default function AuraCasesLanding() {
                                                 whileHover={{ scale: 1.02 }}
                                                 whileTap={{ scale: 0.98 }}
                                             >
-                                                {models.find(model => model.id === selectedModel)?.name || 'Select Model'}
+                                                {models.find(model => model.id === selectedModel)?.name || t('Select Model')}
                                                 <ChevronDown className="ml-2 -mr-1 h-5 w-5" aria-hidden="true" />
                                             </motion.button>
 
@@ -983,7 +993,6 @@ export default function AuraCasesLanding() {
                             </motion.div>
                         </div>
 
-
                         {/* Product Image Carousel for Desktop */}
                         <motion.div
                             className="hidden md:flex md:w-3/4 mb-6 md:mb-0 flex items-center justify-center"
@@ -1016,6 +1025,7 @@ export default function AuraCasesLanding() {
                     </div>
                 </div>
             </section>
+
 
 
             {/* Combined Features and Video Section */}
